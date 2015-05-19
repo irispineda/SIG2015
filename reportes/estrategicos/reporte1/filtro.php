@@ -1,3 +1,29 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener las zonas
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$zonas = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$zonas .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	
+	//consulta para obtener las zonas
+	$query = 'SELECT anio FROM rptestra1 GROUP BY anio';
+	$result = $bd->consultar($query);
+	$anios = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$anios .= "<option value=$line[0]> $line[0]</option>";
+	}
+	$bd->liberar($result);
+	
+	$bd->cerrar();
+	
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -47,29 +73,26 @@
 				<tr>
 					<td>A&ntilde;o:</td>
 					<td><select name="anio">
-							<option> Año1</option>
-							<option> Año2</option>
+							<?php echo $anios; ?>
 						</select>
 					</td>
 					<td>Zona:</td>
-					<td><select name="zona">
-							<option> Zona1</option>
-							<option> Zona2</option>
+					<td><select name="zona" onchange="">
+							<?php echo $zonas; ?>
 						</select>
 					</td>
 				</tr>
 			</table>
 			<br/>
 			<table>
-				<th>
-					<td>Codigo Zona</td>
-					<td>Nombre Zona</td>
-					<td>Meses Adeudados</td>
-					<td>Nombre del Deudor</td>
-					<td>Monto Adeudado</td>
-				</th>
 				<tr>
-					<td></td>
+					<th>Codigo Zona</th>
+					<th>Nombre Zona</th>
+					<th>Meses Adeudados</th>
+					<th>Nombre del Deudor</th>
+					<th>Monto Adeudado</th>
+				</tr>
+				<tr>
 					<td>Codigo Zona</td>
 					<td>Nombre Zona</td>
 					<td>Meses Adeudados</td>
