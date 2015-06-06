@@ -1,9 +1,33 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener los sectores
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$sectores = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$sectores .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	$bd->cerrar();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Untitled Document</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
+	<script language="javascript">
+		$(function() {
+			$( "#datepicker1" ).datepicker();
+			$( "#datepicker2" ).datepicker();
+		});
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -42,6 +66,46 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>INFORME DE PERSONAS CON SERVICIOS DE AGUA Y BIENES INMUEBLES REGISTRADOS<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Inicio de periodo:</td>
+					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="finicio" placeholder="Inicio de periodo" required /></td>
+					<td>Fin de periodo:</td>
+					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="ffin" placeholder="Fin de periodo" required /></td>
+				</tr>
+				<tr>
+					<td>Sector:</td>
+					<td colspan=3><select name="sector" onchange="">
+							<?php echo $sectores; ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Sector</th>
+						<th>Nombre del Sector</th>
+						<th>Codigo Contribuyente</th>
+						<th>Tipo de Inmueble</th>
+						<th>Direcci&oacute;n</th>
+						<th>Servicios que Posee</th>
+					</tr>
+					<tr>
+						<td>Codigo Sector</td>
+						<td>Nombre del Sector</td>
+						<td>Codigo Contribuyente</td>
+						<td>Tipo de Inmueble</td>
+						<td>Direcci&oacute;n</td>
+						<td>Servicios que Posee</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

@@ -1,3 +1,19 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener los servicios
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$servicios = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$servicios .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	
+	$bd->cerrar();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,6 +58,38 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>REPORTE DE LOCALES ARRENDADOS POR LA MUNICIPALIDAD POR TIPO DE SERVICIO<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Servicio:</td>
+					<td><select name="servicio" onchange="">
+							<?php echo $servicios; ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Local</th>
+						<th>Nombre del Local</th>
+						<th>Tipo del Local</th>
+						<th>Nombre del Arrendador</th>
+						<th>Tipo del Contrato</th>
+						<th>Monto a Pagar</th>
+					</tr>
+					<tr>
+						<td>Codigo Local</td>
+						<td>Nombre del Local</td>
+						<td>Tipo del Local</td>
+						<td>Nombre del Arrendador</td>
+						<td>Tipo del Contrato</td>
+						<td>Monto a Pagar</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

@@ -1,3 +1,28 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener las zonas
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$zonas = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$zonas .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	
+	//consulta para obtener los años
+	$query = 'SELECT anio FROM rptestra1 GROUP BY anio';
+	$result = $bd->consultar($query);
+	$anios = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$anios .= "<option value=$line[0]> $line[0]</option>";
+	}
+	$bd->liberar($result);
+	
+	$bd->cerrar();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,6 +67,48 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>INFORME DEL RESPONSABLE POR BARRIO Y CANTONES DEL MUNICIPIO<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Fecha Inicio:</td>
+					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="finicio" placeholder="Inicio de periodo" required /></td>
+					<td>Fecha Final:</td>
+					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="ffin" placeholder="Fin de periodo" required /></td>
+				</tr>
+				<tr>
+					<td>Zona:</td>
+					<td colspan=3><select name="zona" onchange="">
+							<?php echo $zonas; ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Zona</th>
+						<th>Nombre Zona</th>
+						<th>Encargado del Lugar</th>
+						<th>Fecha de Cambios</th>
+						<th>Fecha de Revisiones</th>
+						<th>Reporte</th>
+						<th>Aprobado</th>
+					</tr>
+					<tr>
+						<td>Codigo Zona</td>
+						<td>Nombre Zona</td>
+						<td>Encargado del Lugar</td>
+						<td>Fecha de Cambios</td>
+						<td>Fecha de Revisiones</td>
+						<td>Reporte</td>
+						<td>Aprobado</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

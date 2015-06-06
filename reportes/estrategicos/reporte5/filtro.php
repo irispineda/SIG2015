@@ -4,6 +4,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Untitled Document</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
+	<script language="javascript">
+		$(function() {
+			$( "#datepicker1" ).datepicker();
+		});
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -42,6 +50,30 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>REPORTE DEL SEGUIMIENTO DE LOS CONTRIBUYENTES SOLVENTES CON LA MUNICIPALIDAD<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Fecha:</td>
+					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="fecha" placeholder="Fecha" required /></td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Contribuyente</th>
+						<th>Nombre Contribuyente</th>
+						<th>Monto Pagado</th>
+					</tr>
+					<tr>
+						<td>Codigo Contribuyente</td>
+						<td>Nombre Contribuyente</td>
+						<td>Monto Pagado</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

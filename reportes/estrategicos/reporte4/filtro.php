@@ -1,3 +1,19 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener los sectores
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$sectores = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$sectores .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	
+	$bd->cerrar();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -42,6 +58,36 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>REPORTE DE CLASIFICACION DE CONTRIBUYENTES POR SERVICIOS PRESTADOS<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Sector:</td>
+					<td><select name="sector" onchange="">
+							<?php echo $sectores; ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Sector</th>
+						<th>Nombre del Sector</th>
+						<th>Servicios que posee</th>
+						<th>Nombre del Contribuyente</th>
+						<th>Direcci&oacute;n</th>
+					</tr>
+					<tr>
+						<td>Codigo Sector</td>
+						<td>Nombre del Sector</td>
+						<td>Servicios que posee</td>
+						<td>Nombre del Contribuyente</td>
+						<td>Direcci&oacute;n</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

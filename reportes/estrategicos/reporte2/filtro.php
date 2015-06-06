@@ -1,9 +1,33 @@
+<?php 
+	include "../../../libraries/PHPBD.php";
+	$bd = new PHPBD();
+	$bd->conectar();
+	
+	//consulta para obtener las zonas
+	$query = 'SELECT * FROM zona';
+	$result = $bd->consultar($query);
+	$zonas = "";
+	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
+		$zonas .= "<option value=$line[0]> $line[1] $line[2]</option>";
+	}
+	$bd->liberar($result);
+	$bd->cerrar();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Untitled Document</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
+	<script language="javascript">
+		$(function() {
+			$( "#datepicker1" ).datepicker();
+			$( "#datepicker2" ).datepicker();
+		});
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -42,6 +66,50 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
+			<center><h2>CONTROL DE CONVENIOS DE PAGOS POR PERIODO<hr/></h2></center>
+			<table>
+				<tr>
+					<td>Inicio de periodo:</td>
+					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="finicio" placeholder="Inicio de periodo" required /></td>
+					<td>Fin de periodo:</td>
+					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+							   name="ffin" placeholder="Fin de periodo" required /></td>
+				</tr>
+				<tr>
+					<td>Zona:</td>
+					<td colspan=3><select name="zona" onchange="">
+							<?php echo $zonas; ?>
+						</select>
+					</td>
+				</tr>
+			</table>
+			<br/>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Zona</th>
+						<th>Nombre Zona</th>
+						<th>Codigo Contribuyente</th>
+						<th>Nombre Contribuyente</th>
+						<th>Fecha Inicio</th>
+						<th>Fecha Final</th>
+						<th>Monto</th>
+						<th>Saldo</th>
+					</tr>
+					<tr>
+						<td>Codigo Zona</td>
+						<td>Nombre Zona</td>
+						<td>Codigo Contribuyente</td>
+						<td>Nombre Contribuyente</td>
+						<td>Fecha Inicio</td>
+						<td>Fecha Final</td>
+						<td>Monto</td>
+						<td>Saldo</td>
+					</tr>
+				</table>
+			</div>
+			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
 				<input type="submit" value="Cancelar"/>

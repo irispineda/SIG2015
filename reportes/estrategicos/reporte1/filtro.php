@@ -12,7 +12,7 @@
 	}
 	$bd->liberar($result);
 	
-	//consulta para obtener las zonas
+	//consulta para obtener los años
 	$query = 'SELECT anio FROM rptestra1 GROUP BY anio';
 	$result = $bd->consultar($query);
 	$anios = "";
@@ -22,7 +22,6 @@
 	$bd->liberar($result);
 	
 	$bd->cerrar();
-	
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -84,22 +83,24 @@
 				</tr>
 			</table>
 			<br/>
-			<table>
-				<tr>
-					<th>Codigo Zona</th>
-					<th>Nombre Zona</th>
-					<th>Meses Adeudados</th>
-					<th>Nombre del Deudor</th>
-					<th>Monto Adeudado</th>
-				</tr>
-				<tr>
-					<td>Codigo Zona</td>
-					<td>Nombre Zona</td>
-					<td>Meses Adeudados</td>
-					<td>Meses del Deudor</td>
-					<td>Monto Adeudado</td>
-				</tr>
-			</table>
+			<div id="detalle">
+				<table>
+					<tr>
+						<th>Codigo Zona</th>
+						<th>Nombre Zona</th>
+						<th>Meses Adeudados</th>
+						<th>Nombre del Deudor</th>
+						<th>Monto Adeudado</th>
+					</tr>
+					<tr>
+						<td>Codigo Zona</td>
+						<td>Nombre Zona</td>
+						<td>Meses Adeudados</td>
+						<td>Meses del Deudor</td>
+						<td>Monto Adeudado</td>
+					</tr>
+				</table>
+			</div>
 			<br/>
 			<center>
 				<input type="submit" value="Generar reporte"/>
