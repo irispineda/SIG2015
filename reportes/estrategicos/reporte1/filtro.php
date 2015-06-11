@@ -4,16 +4,16 @@
 	$bd->conectar();
 	
 	//consulta para obtener las zonas
-	$query = 'SELECT * FROM zona';
+	$query = 'SELECT cod_zona, des_zona FROM rptestra1 GROUP BY cod_zona, des_zona ORDER BY cod_zona';
 	$result = $bd->consultar($query);
 	$zonas = "";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-		$zonas .= "<option value=$line[0]> $line[1] $line[2]</option>";
+		$zonas .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}
 	$bd->liberar($result);
 	
 	//consulta para obtener los años
-	$query = 'SELECT anio FROM rptestra1 GROUP BY anio';
+	$query = 'SELECT anio FROM rptestra1 GROUP BY anio ORDER BY anio';
 	$result = $bd->consultar($query);
 	$anios = "";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
@@ -27,7 +27,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-	<title>Untitled Document</title>
+	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -39,7 +39,16 @@
 		<div id="menu">
 			<ul>
 				<li><a href="../../../index.html">Inicio</a></li>
-				<li></li>
+				<li>
+					Nivel T&aacute;ctico
+					<ul>
+						<li><a href="../../../reportes/tacticos/reporte1/filtro.php">Reporte 1. Informe  de personas con servicios de agua y bienes inmuebles registrados</a></li>
+						<li><a href="../../../reportes/tacticos/reporte2/filtro.php">Reporte 2. Estado de los t&iacute;tulos de perpetuidad</a></li>
+						<li><a href="../../../reportes/tacticos/reporte3/filtro.php">Reporte 3. Control del n&uacute;mero de contribuyentes activos</a></li>
+						<li><a href="../../../reportes/tacticos/reporte4/filtro.php">Reporte 4. Informe del responsable por barrio y cantones del municipio</a></li>
+						<li><a href="../../../reportes/tacticos/reporte5/filtro.php">Reporte 5. Barrios y cantones que no poseen servicios municipales</a></li>
+					</ul>
+				</li>
 				<li>
 					Nivel Estr&aacute;tegico
 					<ul>
@@ -51,17 +60,6 @@
 						<li><a href="../../../reportes/estrategicos/reporte6/filtro.php">Reporte 6. Clasificaci&oacute;n  de los locales arrendados por la municipalidad por tipo de servicio</a></li>
 					</ul>
 				</li>
-				<li>
-					Nivel T&aacute;ctico
-					<ul>
-						<li><a href="../../../reportes/tacticos/reporte1/filtro.php">Reporte 1. Informe  de personas con servicios de agua y bienes inmuebles registrados</a></li>
-						<li><a href="../../../reportes/tacticos/reporte2/filtro.php">Reporte 2. Estado de los t&iacute;tulos de perpetuidad</a></li>
-						<li><a href="../../../reportes/tacticos/reporte3/filtro.php">Reporte 3. Control de el número de contribuyentes activos</a></li>
-						<li><a href="../../../reportes/tacticos/reporte4/filtro.php">Reporte 4. Informe del responsable por barrio y cantones del municipio</a></li>
-						<li><a href="../../../reportes/tacticos/reporte5/filtro.php">Reporte 5. Barrios y cantones que no poseen servicios municipales</a></li>
-					</ul>
-				</li>
-				
 			</ul>
 		</div>
 		<!--<div id="avisos">
