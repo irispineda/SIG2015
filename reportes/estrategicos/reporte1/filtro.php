@@ -6,7 +6,7 @@
 	//consulta para obtener las zonas
 	$query = 'SELECT cod_zona, des_zona FROM rptestra1 GROUP BY cod_zona, des_zona ORDER BY cod_zona';
 	$result = $bd->consultar($query);
-	$zonas = "";
+	$zonas = "<option value=-1 selected>--- Elige zona ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$zonas .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}
@@ -15,7 +15,7 @@
 	//consulta para obtener los años
 	$query = 'SELECT anio FROM rptestra1 GROUP BY anio ORDER BY anio';
 	$result = $bd->consultar($query);
-	$anios = "";
+	$anios = "<option value=-1 selected>--- Elige a&ntilde;o ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$anios .= "<option value=$line[0]> $line[0]</option>";
 	}
@@ -29,6 +29,23 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -69,12 +86,12 @@
 			<table>
 				<tr>
 					<td>A&ntilde;o:</td>
-					<td><select name="anio">
+					<td><select name="anio" id="anio" onchange="cargarDetalle();">
 							<?php echo $anios; ?>
 						</select>
 					</td>
 					<td>Zona:</td>
-					<td><select name="zona" onchange="">
+					<td><select name="zona" id="zona" onchange="cargarDetalle();">
 							<?php echo $zonas; ?>
 						</select>
 					</td>
@@ -90,19 +107,13 @@
 						<th>Nombre del Deudor</th>
 						<th>Monto Adeudado</th>
 					</tr>
-					<tr>
-						<td>Codigo Zona</td>
-						<td>Nombre Zona</td>
-						<td>Meses Adeudados</td>
-						<td>Meses del Deudor</td>
-						<td>Monto Adeudado</td>
-					</tr>
+					<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>
 				</table>
 			</div>
 			<br/>
 			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
+				<input name="boton" id="generar" type="button" value="Generar reporte" disabled="true" />
+				<input name="boton" id="cancelar" type="button" value="Cancelar" />
 			</center>
 		</div>
 		<div id="footer">
