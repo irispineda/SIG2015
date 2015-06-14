@@ -6,7 +6,7 @@
 	//consulta para obtener los sectores
 	$query = 'SELECT cod_sector, des_sector FROM rpttacti1 GROUP BY cod_sector, des_sector ORDER BY cod_sector';
 	$result = $bd->consultar($query);
-	$sectores = "";
+	$sectores = "<option value=-1 selected>--- Elige sector ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$sectores .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}
@@ -27,6 +27,26 @@
 			$( "#datepicker1" ).datepicker();
 			$( "#datepicker2" ).datepicker();
 		});
+	</script>
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idsector=document.getElementById("sector").value;
+			var finicio=document.getElementById("datepicker1").value;
+			var ffin=document.getElementById("datepicker2").value;
+			if (finicio != "" && ffin != ""){
+				if(finicio > ffin){
+					alert("Revise el rango de fechas");
+					return;
+				}
+			}
+			if (finicio != "" && ffin != "" && idsector != -1){
+				$("#detalle").load('detalle.php?finicio='+finicio+'&ffin='+ffin+'&sector='+idsector);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
 	</script>
 </head>
 <body>
@@ -64,50 +84,58 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>INFORME DE PERSONAS CON SERVICIOS DE AGUA Y BIENES INMUEBLES REGISTRADOS<hr/></h2></center>
-			<table>
-				<tr>
-					<td>Inicio de periodo:</td>
-					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="finicio" placeholder="Inicio de periodo" required /></td>
-					<td>Fin de periodo:</td>
-					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="ffin" placeholder="Fin de periodo" required /></td>
-				</tr>
-				<tr>
-					<td>Sector:</td>
-					<td colspan=3><select name="sector" onchange="">
-							<?php echo $sectores; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>INFORME DE PERSONAS CON SERVICIOS DE AGUA Y BIENES INMUEBLES REGISTRADOS<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Sector</th>
-						<th>Nombre del Sector</th>
-						<th>Codigo Contribuyente</th>
-						<th>Tipo de Inmueble</th>
-						<th>Direcci&oacute;n</th>
-						<th>Servicios que Posee</th>
+						<td>Inicio de periodo:</td>
+						<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="finicio" placeholder="Inicio de periodo" required onchange="cargarDetalle();" /></td>
+						<td>Fin de periodo:</td>
+						<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="ffin" placeholder="Fin de periodo" required onchange="cargarDetalle();" /></td>
 					</tr>
 					<tr>
-						<td>Codigo Sector</td>
-						<td>Nombre del Sector</td>
-						<td>Codigo Contribuyente</td>
-						<td>Tipo de Inmueble</td>
-						<td>Direcci&oacute;n</td>
-						<td>Servicios que Posee</td>
+						<td>Sector:</td>
+						<td><select name="sector" id="sector" onchange="cargarDetalle();">
+								<?php echo $sectores; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Sector</th>
+							<th>Nombre del Sector</th>
+							<th>Codigo Contribuyente</th>
+							<th>Tipo de Inmueble</th>
+							<th>Direcci&oacute;n</th>
+							<th>Servicios que Posee</th>
+						</tr>
+						<tr>
+							<td>Codigo Sector</td>
+							<td>Nombre del Sector</td>
+							<td>Codigo Contribuyente</td>
+							<td>Tipo de Inmueble</td>
+							<td>Direcci&oacute;n</td>
+							<td>Servicios que Posee</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>
