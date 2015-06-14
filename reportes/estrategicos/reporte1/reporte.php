@@ -39,7 +39,7 @@
 		$titulo='REPORTE DE CONTRIBUYENTES MOROSOS MAYOR A TRES MESES';
 		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
 		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,95,32);
+		$anchos=array(25,50,35,135,32);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -51,10 +51,16 @@
 		}else{
 			//reporte en pdf
 			$pdf=new PDF('L');
-			$pdf->Inicial();
-			$pdf->Encabezado($titulo,$parametros);
-			
-			$pdf->TablaHeader($columnas,$anchos);
+			$pdf->SetTitle($titulo);
+			$pdf->SetAuthor("root");
+			$pdf->SetSubject($parametros);
+			$pdf->fecha=date("d/m/Y");
+			$pdf->hora=date("H:i:s",time());
+			$pdf->columnas=$columnas;
+			$pdf->anchos=$anchos;
+			$pdf->SetAutoPageBreak(true,10);
+			$pdf->AliasNbPages();
+			$pdf->AddPage();
 		}
 		
 		//consulta para obtener los datos
@@ -62,7 +68,7 @@
 				   FROM rptestra1 
 				   WHERE anio='.$anio.'
 				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona';
+				   ORDER BY cod_zona,deudor,meses';
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte
@@ -90,7 +96,6 @@
 			exit;
 		}else{
 			//reporte en pdf
-			$pdf->Pie();
 			$pdf->Output('RptEstra1','I');
 		}
 	}else{
