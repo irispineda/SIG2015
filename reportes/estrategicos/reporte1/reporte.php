@@ -1,6 +1,7 @@
 <?php
 	include "../../../libraries/PHPBD.php";
-	include ("../../../libraries/pdf.php");
+	include "../../../libraries/pdf.php";
+	include "../../../libraries/excel.php";
 	
 	setlocale(LC_ALL,"es_ES");
 
@@ -11,6 +12,7 @@
 	$usuario="root";
 	$fecha=date("d/m/Y");
 	$hora=date("H:i:s",time());
+	
 	
 	$bd = new PHPBD();
 	$bd->conectar();
@@ -34,16 +36,25 @@
 		}
 		$bd->liberar($result);
 		
+		$titulo='REPORTE DE CONTRIBUYENTES MOROSOS MAYOR A TRES MESES';
+		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
+		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
+		$anchos=array(25,50,35,95,32);
+		
 		//encabezados
 		if($tipo=="XLS"){
 			//reporte en excel
+			$xls = new Excel();
+			$xls->Encabezado($titulo,$parametros,'4');
+			$xls->TablaHeader($columnas,$anchos);
+			$fil=6;
 		}else{
 			//reporte en pdf
 			$pdf=new PDF('L');
 			$pdf->Inicial();
-			$pdf->Encabezado('REPORTE DE CONTRIBUYENTES MOROSOS MAYOR A TRES MESES','Año: '.$anio.' Zona: '.$zona.' '.$zonaDes);
-			$anchos=array(25,50,35,95,32);
-			$pdf->TablaHeader(array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado'),$anchos);
+			$pdf->Encabezado($titulo,$parametros);
+			
+			$pdf->TablaHeader($columnas,$anchos);
 		}
 		
 		//consulta para obtener los datos
@@ -57,18 +68,26 @@
 			//cuerpo del reporte
 			if($tipo=="XLS"){
 				//reporte en excel
+				++$fil;
+				$xls->Tabla($line,$anchos,$fil);
 			}else{
 				//reporte en pdf
 				$pdf->Tabla($line,$anchos);
 			}
 		}
 		$bd->liberar($result);
-		
 		$bd->cerrar();
 		
 		//fin del reporte
 		if($tipo=="XLS"){
 			//reporte en excel
+			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			header('Content-Disposition: attachment;filename="RptEstra1.xlsx"');
+			header('Cache-Control: max-age=0');
+			 
+			$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');
+			$objWriter->save('php://output');
+			exit;
 		}else{
 			//reporte en pdf
 			$pdf->Pie();
