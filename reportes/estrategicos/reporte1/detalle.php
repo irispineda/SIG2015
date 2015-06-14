@@ -12,7 +12,8 @@
 	$anio = $_GET["anio"];
 	$zona = $_GET["zona"];
 	$hay=true;
-	//consulta para obtener las zonas
+	
+	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
 	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
@@ -21,7 +22,6 @@
 			   AND cod_zona='.$zona.'
 			   ORDER BY cod_zona';
 	$result = $bd->consultar($query);
-	$zonas = "";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;
 		$print .= "<tr>
@@ -39,5 +39,6 @@
 		$print .= "<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>";
 	}
 	$print .= '</table>';
+	
 	echo $print;
 ?>

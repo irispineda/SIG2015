@@ -41,7 +41,7 @@
 				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
 				document.getElementById("generar").disabled=false;
 			}else{
-				
+				document.getElementById("generar").disabled=true;
 			}
 		}
 	</script>
@@ -82,39 +82,47 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>REPORTE DE CONTRIBUYENTES MOROSOS MAYOR A TRES MESES <hr/></h2></center>
-			<table>
-				<tr>
-					<td>A&ntilde;o:</td>
-					<td><select name="anio" id="anio" onchange="cargarDetalle();">
-							<?php echo $anios; ?>
-						</select>
-					</td>
-					<td>Zona:</td>
-					<td><select name="zona" id="zona" onchange="cargarDetalle();">
-							<?php echo $zonas; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>REPORTE DE CONTRIBUYENTES MOROSOS MAYOR A TRES MESES<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Meses Adeudados</th>
-						<th>Nombre del Deudor</th>
-						<th>Monto Adeudado</th>
+						<td>A&ntilde;o:</td>
+						<td><select name="anio" id="anio" onchange="cargarDetalle();">
+								<?php echo $anios; ?>
+							</select>
+						</td>
+						<td>Zona:</td>
+						<td><select name="zona" id="zona" onchange="cargarDetalle();">
+								<?php echo $zonas; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
-					<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input name="boton" id="generar" type="button" value="Generar reporte" disabled="true" />
-				<input name="boton" id="cancelar" type="button" value="Cancelar" />
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Zona</th>
+							<th>Nombre Zona</th>
+							<th>Meses Adeudados</th>
+							<th>Nombre del Deudor</th>
+							<th>Monto Adeudado</th>
+						</tr>
+						<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>
