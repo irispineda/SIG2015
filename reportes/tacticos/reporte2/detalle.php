@@ -18,33 +18,31 @@
 	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
-	$query = ' SELECT anio,cod_zona,des_zona,tipo_cementerio,propietario,tipo_espacio,fallecido,beneficiarios
+	$query = ' SELECT ident,anio,tipo_cementerio,propietario,tipo_espacio,fallecido,beneficiarios
 			   FROM rpttacti2 
 			   WHERE anio='.$anio.'
 			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';echo $query;
+			   ORDER BY ident';
 	$result = $bd->consultar($query);
-	$i=0;
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;
-		++$i;
 		$print .= "<tr>
-					<td>$i</td>
 					<td>$line[0]</td>
 					<td>$line[1]</td>
 					<td>$line[2]</td>
 					<td>$line[3]</td>
 					<td>$line[4]</td>
 					<td>$line[5]</td>
+					<td>$line[6]</td>
 				</tr>";
 	}
 	$bd->liberar($result);
 	$bd->cerrar();
 	
 	if ($hay){
-		$print .= "<tr><td colspan=7><center>NO EXISTE INFORMACION1</center></td></tr>";
+		$print .= "<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>";
 	}
 	$print .= '</table>';
-	echo $query;
-	//echo $print;
+	
+	echo $print;
 ?>
