@@ -36,9 +36,9 @@
 	<script type="text/javascript">
 		function cargarDetalle(){
 			var idanio=document.getElementById("anio").value;
-			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var idsector=document.getElementById("sector").value;
+			if (idanio != -1 && idsector != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&sector='+idsector);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;
