@@ -40,7 +40,7 @@
 					Nivel T&aacute;ctico
 					<ul>
 						<li><a href="../../../reportes/tacticos/reporte1/filtro.php">Reporte 1. Informe  de personas con servicios de agua y bienes inmuebles registrados</a></li>
-						<li><a href="../../../reportes/tacticos/reporte2/filtro.php">Reporte 2. Estado de los t&iacute;tulos de perpetuidad</a></li>
+						<li><a href="../../../reportes/tacticos/reporte2/filtro.php">Reporte 2. Estado de los t&iacute;tulos perpetuidad</a></li>
 						<li><a href="../../../reportes/tacticos/reporte3/filtro.php">Reporte 3. Control del n&uacute;mero de contribuyentes activos</a></li>
 						<li><a href="../../../reportes/tacticos/reporte4/filtro.php">Reporte 4. Informe del responsable por barrio y cantones del municipio</a></li>
 						<li><a href="../../../reportes/tacticos/reporte5/filtro.php">Reporte 5. Barrios y cantones que no poseen servicios municipales</a></li>
@@ -68,7 +68,7 @@
 					<tr>
 						<td>Fecha:</td>
 						<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-								   name="fecha" placeholder="Fecha" required /></td>
+								   name="fecha" placeholder="Fecha" required onchange="cargarDetalle();" /></td>
 						<td>Tipo de Reporte:</td>
 						<td><select name="tipo" id="tipo">
 								<option value="XLS" selected>Excel</option>
