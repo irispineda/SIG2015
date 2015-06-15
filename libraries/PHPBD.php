@@ -24,5 +24,11 @@
 		public function liberar($result){
 			mysqli_free_result($result);
 		}
+		
+		//formatea fechas
+		public function formateaFecha($fecha){
+			$newFecha=explode("/",$fecha);
+			return $newFecha[2]."-".$newFecha[1]."-".$newFecha[0];
+		}
 	}
 ?>
