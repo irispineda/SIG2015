@@ -116,16 +116,7 @@
 							<th>Monto</th>
 							<th>Saldo</th>
 						</tr>
-						<tr>
-							<td>Codigo Zona</td>
-							<td>Nombre Zona</td>
-							<td>Codigo Contribuyente</td>
-							<td>Nombre Contribuyente</td>
-							<td>Fecha Inicio</td>
-							<td>Fecha Final</td>
-							<td>Monto</td>
-							<td>Saldo</td>
-						</tr>
+						<tr><td colspan=8><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

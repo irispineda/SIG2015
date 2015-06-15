@@ -97,13 +97,7 @@
 							<th>Nombre del Contribuyente</th>
 							<th>Direcci&oacute;n</th>
 						</tr>
-						<tr>
-							<td>Codigo Sector</td>
-							<td>Nombre del Sector</td>
-							<td>Servicios que posee</td>
-							<td>Nombre del Contribuyente</td>
-							<td>Direcci&oacute;n</td>
-						</tr>
+						<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

@@ -3,11 +3,13 @@
 	
 	$print="<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Meses Adeudados</th>
-						<th>Nombre del Deudor</th>
-						<th>Monto Adeudado</th>
+						<th>No. Correlativo</th>
+						<th>A&ntilde;o</th>
+						<th>Cementerio Nuevo o Viejo</th>
+						<th>Nombre del Propietario del T&iacute;tulo</th>
+						<th>Nicho o Fosa Com&uacute;n</th>
+						<th>Nombre del Fallecido</th>
+						<th>Beneficiarios (al menos dos)</th>
 					</tr>";
 	$anio = $_GET["anio"];
 	$zona = $_GET["zona"];
@@ -16,27 +18,31 @@
 	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
+	$query = ' SELECT anio,cod_zona,des_zona,tipo_cementerio,propietario,tipo_espacio,fallecido,beneficiarios
+			   FROM rpttacti2 
 			   WHERE anio='.$anio.'
 			   AND cod_zona='.$zona.'
 			   ORDER BY cod_zona';
 	$result = $bd->consultar($query);
+	$i=0;
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;
+		++$i;
 		$print .= "<tr>
+					<td>$i</td>
 					<td>$line[0]</td>
 					<td>$line[1]</td>
 					<td>$line[2]</td>
 					<td>$line[3]</td>
 					<td>$line[4]</td>
+					<td>$line[5]</td>
 				</tr>";
 	}
 	$bd->liberar($result);
 	$bd->cerrar();
 	
 	if ($hay){
-		$print .= "<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>";
+		$print .= "<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>";
 	}
 	$print .= '</table>';
 	

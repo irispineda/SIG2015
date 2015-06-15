@@ -113,15 +113,7 @@
 							<th>Servicios que Posee</th>
 							<th>Activo o No Activo</th>
 						</tr>
-						<tr>
-							<td>Codigo Sector</td>
-							<td>Nombre del Sector</td>
-							<td>Codigo del Contribuyente</td>
-							<td>Nombre del Contribuyente</td>
-							<td>Direcci&oacute;n</td>
-							<td>Servicios que Posee</td>
-							<td>Activo o No Activo</td>
-						</tr>
+						<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

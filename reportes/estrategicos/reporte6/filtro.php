@@ -98,14 +98,7 @@
 							<th>Tipo del Contrato</th>
 							<th>Monto a Pagar</th>
 						</tr>
-						<tr>
-							<td>Codigo Local</td>
-							<td>Nombre del Local</td>
-							<td>Tipo del Local</td>
-							<td>Nombre del Arrendador</td>
-							<td>Tipo del Contrato</td>
-							<td>Monto a Pagar</td>
-						</tr>
+						<tr><td colspan=6><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

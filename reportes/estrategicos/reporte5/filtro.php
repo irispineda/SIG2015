@@ -85,11 +85,7 @@
 							<th>Nombre Contribuyente</th>
 							<th>Monto Pagado</th>
 						</tr>
-						<tr>
-							<td>Codigo Contribuyente</td>
-							<td>Nombre Contribuyente</td>
-							<td>Monto Pagado</td>
-						</tr>
+						<tr><td colspan=3><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

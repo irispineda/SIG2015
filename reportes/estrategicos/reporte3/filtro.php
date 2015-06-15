@@ -98,14 +98,7 @@
 							<th>Tasa Actual</th>
 							<th>Tasa Nueva</th>
 						</tr>
-						<tr>
-							<td>Codigo Municipio</td>
-							<td>Nombre Municipio</td>
-							<td>Codigo Sector</td>
-							<td>Nombre del Sector</td>
-							<td>Tasa Actual</td>
-							<td>Tasa Nueva</td>
-						</tr>
+						<tr><td colspan=6><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

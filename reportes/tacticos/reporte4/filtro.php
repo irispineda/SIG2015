@@ -107,15 +107,7 @@
 							<th>Reporte</th>
 							<th>Aprobado</th>
 						</tr>
-						<tr>
-							<td>Codigo Zona</td>
-							<td>Nombre Zona</td>
-							<td>Encargado del Lugar</td>
-							<td>Fecha de Cambios</td>
-							<td>Fecha de Revisiones</td>
-							<td>Reporte</td>
-							<td>Aprobado</td>
-						</tr>
+						<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

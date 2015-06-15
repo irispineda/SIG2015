@@ -32,6 +32,7 @@
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
+			alert("123");
 			var idanio=document.getElementById("anio").value;
 			var idzona=document.getElementById("zona").value;
 			if (idanio != -1 && idzona != -1){
@@ -112,15 +113,7 @@
 							<th>Nombre del Fallecido</th>
 							<th>Beneficiarios (al menos dos)</th>
 						</tr>
-						<tr>
-							<td>No. Correlativo</td>
-							<td>A&ntilde;o</td>
-							<td>Cementerio Nuevo o Viejo</td>
-							<td>Nombre del Propietario del T&iacute;tulo</td>
-							<td>Nicho o Fosa Com&uacute;n</td>
-							<td>Nombre del Fallecido</td>
-							<td>Beneficiarios (al menos dos)</td>
-						</tr>
+						<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

@@ -110,12 +110,7 @@
 							<th>Direcci&oacute;n</th>
 							<th>Servicios Municipales</th>
 						</tr>
-						<tr>
-							<td>Codigo Sector</td>
-							<td>Nombre del Sector</td>
-							<td>Direcci&oacute;n</td>
-							<td>Servicios Municipales</td>
-						</tr>
+						<tr><td colspan=4><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

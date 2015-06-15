@@ -120,14 +120,7 @@
 							<th>Direcci&oacute;n</th>
 							<th>Servicios que Posee</th>
 						</tr>
-						<tr>
-							<td>Codigo Sector</td>
-							<td>Nombre del Sector</td>
-							<td>Codigo Contribuyente</td>
-							<td>Tipo de Inmueble</td>
-							<td>Direcci&oacute;n</td>
-							<td>Servicios que Posee</td>
-						</tr>
+						<tr><td colspan=6><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>
