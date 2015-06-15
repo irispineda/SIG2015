@@ -84,7 +84,7 @@
 		if($tipo=="XLS"){
 			//reporte en excel
 			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="RptEstra1.xlsx"');
+			header('Content-Disposition: attachment;filename="RptEstra4.xlsx"');
 			header('Cache-Control: max-age=0');
 			 
 			$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');

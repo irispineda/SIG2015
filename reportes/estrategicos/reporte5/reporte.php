@@ -38,7 +38,7 @@
 		if($tipo=="XLS"){
 			//reporte en excel
 			$xls = new Excel();
-			$xls->Encabezado($titulo,$parametros,'4');
+			$xls->Encabezado($titulo,$parametros,'2');
 			$xls->TablaHeader($columnas,$anchos);
 			$fil=6;
 		}else{
@@ -80,7 +80,7 @@
 		if($tipo=="XLS"){
 			//reporte en excel
 			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="RptEstra1.xlsx"');
+			header('Content-Disposition: attachment;filename="RptEstra5.xlsx"');
 			header('Cache-Control: max-age=0');
 			 
 			$objWriter = PHPExcel_IOFactory::createWriter($xls, 'Excel2007');

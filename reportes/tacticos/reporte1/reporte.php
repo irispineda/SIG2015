@@ -45,7 +45,7 @@
 		if($tipo=="XLS"){
 			//reporte en excel
 			$xls = new Excel();
-			$xls->Encabezado($titulo,$parametros,'4');
+			$xls->Encabezado($titulo,$parametros,'5');
 			$xls->TablaHeader($columnas,$anchos);
 			$fil=6;
 		}else{
