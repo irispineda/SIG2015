@@ -6,7 +6,7 @@
 	setlocale(LC_ALL,"es_ES");
 
 	$anio = $_POST["anio"];
-	$zona = $_POST["zona"];
+	$sector = $_POST["sector"];
 	$tipo = $_POST["tipo"];
 	
 	$usuario="root";
@@ -18,28 +18,28 @@
 	$bd->conectar();
 	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
+	$query = ' SELECT cod_sector,des_sector,cod_contribuyente,des_contribuyente,direccion,des_servicio,activo
+			   FROM rpttacti3 
 			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+			   AND cod_sector='.$sector.'
+			   ORDER BY cod_sector';
 	$result = $bd->consultar($query);
 	$registros=mysqli_num_rows($result);
 	$bd->liberar($result);
 	
 	if ($registros > 0){
 		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
+		$query = "SELECT des_sector FROM rpttacti3 WHERE cod_sector = '".$sector."' GROUP BY des_sector ";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-			$zonaDes = $line[0];
+			$sectorDes = $line[0];
 		}
 		$bd->liberar($result);
 		
 		$titulo='REPORTE DEL CONTROL DEL NUMERO DE CONTRIBUYENTES ACTIVOS';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
-		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,135,32);
+		$parametros='Año: '.$anio.' Zona: '.$sector.' '.$sectorDes;
+		$columnas=array('Codigo Sector','Nombre del Sector','Codigo del Contribuyente','Nombre del Contribuyente','Dirección','Servicios que Posee','Activo o No Activo');
+		$anchos=array(20,40,40,50,50,45,30);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -64,11 +64,11 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-				   FROM rptestra1 
+		$query = ' SELECT cod_sector,des_sector,cod_contribuyente,des_contribuyente,direccion,des_servicio,activo
+				   FROM rpttacti3 
 				   WHERE anio='.$anio.'
-				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona,deudor,meses';
+				   AND cod_sector='.$sector.'
+				   ORDER BY cod_sector';
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte
