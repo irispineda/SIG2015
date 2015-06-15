@@ -28,6 +28,20 @@
 			$( "#datepicker2" ).datepicker();
 		});
 	</script>
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -64,54 +78,62 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>CONTROL DE CONVENIOS DE PAGOS POR PERIODO<hr/></h2></center>
-			<table>
-				<tr>
-					<td>Inicio de periodo:</td>
-					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="finicio" placeholder="Inicio de periodo" required /></td>
-					<td>Fin de periodo:</td>
-					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="ffin" placeholder="Fin de periodo" required /></td>
-				</tr>
-				<tr>
-					<td>Zona:</td>
-					<td colspan=3><select name="zona" onchange="">
-							<?php echo $zonas; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>CONTROL DE CONVENIOS DE PAGOS POR PERIODO<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Codigo Contribuyente</th>
-						<th>Nombre Contribuyente</th>
-						<th>Fecha Inicio</th>
-						<th>Fecha Final</th>
-						<th>Monto</th>
-						<th>Saldo</th>
+						<td>Inicio de periodo:</td>
+						<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="finicio" placeholder="Inicio de periodo" required /></td>
+						<td>Fin de periodo:</td>
+						<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="ffin" placeholder="Fin de periodo" required /></td>
 					</tr>
 					<tr>
-						<td>Codigo Zona</td>
-						<td>Nombre Zona</td>
-						<td>Codigo Contribuyente</td>
-						<td>Nombre Contribuyente</td>
-						<td>Fecha Inicio</td>
-						<td>Fecha Final</td>
-						<td>Monto</td>
-						<td>Saldo</td>
+						<td>Zona:</td>
+						<td><select name="zona" onchange="">
+								<?php echo $zonas; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Zona</th>
+							<th>Nombre Zona</th>
+							<th>Codigo Contribuyente</th>
+							<th>Nombre Contribuyente</th>
+							<th>Fecha Inicio</th>
+							<th>Fecha Final</th>
+							<th>Monto</th>
+							<th>Saldo</th>
+						</tr>
+						<tr>
+							<td>Codigo Zona</td>
+							<td>Nombre Zona</td>
+							<td>Codigo Contribuyente</td>
+							<td>Nombre Contribuyente</td>
+							<td>Fecha Inicio</td>
+							<td>Fecha Final</td>
+							<td>Monto</td>
+							<td>Saldo</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>

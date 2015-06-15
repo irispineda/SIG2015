@@ -15,10 +15,10 @@
 			
 			$this->Image("../../../images/header.jpg",10,8,33);
 			
-			$this->SetFont('Arial','B',16);
+			$this->SetFont('Arial','B',13);
 			$this->Cell(0,8,utf8_decode($this->title),0,1,'C');
 			
-			$this->SetFont('Arial','I',14);
+			$this->SetFont('Arial','I',12);
 			$this->Cell(0,8,utf8_decode($this->subject),0,0,'C');
 			
 			$this->SetFont('Arial','',8);
@@ -27,7 +27,7 @@
 			$this->Cell(0,4,'Hora: '.$this->hora,0,1,'R');
 			$this->Ln();
 			
-			$this->SetFont('Arial','B',10);
+			$this->SetFont('Arial','B',8);
 			$i=0;
 			foreach($this->columnas as $col){
 				$ancho=$this->anchos[$i];
@@ -45,7 +45,7 @@
 		
 		//datos de tabla
 		function Tabla($datos,$size){
-			$this->SetFont('Arial','',10);
+			$this->SetFont('Arial','',6);
 			$i=0;
 			foreach($datos as $col){
 				$ancho=$size[$i];

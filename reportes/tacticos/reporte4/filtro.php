@@ -20,6 +20,20 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -56,52 +70,60 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>INFORME DEL RESPONSABLE POR BARRIO Y CANTONES DEL MUNICIPIO<hr/></h2></center>
-			<table>
-				<tr>
-					<td>Fecha Inicio:</td>
-					<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="finicio" placeholder="Inicio de periodo" required /></td>
-					<td>Fecha Final:</td>
-					<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
-							   name="ffin" placeholder="Fin de periodo" required /></td>
-				</tr>
-				<tr>
-					<td>Zona:</td>
-					<td colspan=3><select name="zona" onchange="">
-							<?php echo $zonas; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>INFORME DEL RESPONSABLE POR BARRIO Y CANTONES DEL MUNICIPIO<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Encargado del Lugar</th>
-						<th>Fecha de Cambios</th>
-						<th>Fecha de Revisiones</th>
-						<th>Reporte</th>
-						<th>Aprobado</th>
+						<td>Fecha Inicio:</td>
+						<td><input id="datepicker1" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="finicio" placeholder="Inicio de periodo" required /></td>
+						<td>Fecha Final:</td>
+						<td><input id="datepicker2" pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d" type="text" 
+								   name="ffin" placeholder="Fin de periodo" required /></td>
 					</tr>
 					<tr>
-						<td>Codigo Zona</td>
-						<td>Nombre Zona</td>
-						<td>Encargado del Lugar</td>
-						<td>Fecha de Cambios</td>
-						<td>Fecha de Revisiones</td>
-						<td>Reporte</td>
-						<td>Aprobado</td>
+						<td>Zona:</td>
+						<td><select name="zona" onchange="">
+								<?php echo $zonas; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Zona</th>
+							<th>Nombre Zona</th>
+							<th>Encargado del Lugar</th>
+							<th>Fecha de Cambios</th>
+							<th>Fecha de Revisiones</th>
+							<th>Reporte</th>
+							<th>Aprobado</th>
+						</tr>
+						<tr>
+							<td>Codigo Zona</td>
+							<td>Nombre Zona</td>
+							<td>Encargado del Lugar</td>
+							<td>Fecha de Cambios</td>
+							<td>Fecha de Revisiones</td>
+							<td>Reporte</td>
+							<td>Aprobado</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>

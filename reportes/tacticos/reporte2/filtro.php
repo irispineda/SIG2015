@@ -6,7 +6,7 @@
 	//consulta para obtener las zonas
 	$query = 'SELECT cod_zona, des_zona FROM rpttacti2 GROUP BY cod_zona, des_zona ORDER BY cod_zona';
 	$result = $bd->consultar($query);
-	$zonas = "";
+	$zonas = "<option value=-1 selected>--- Elige zona ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$zonas .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}
@@ -15,7 +15,7 @@
 	//consulta para obtener los años
 	$query = 'SELECT anio FROM rpttacti2 GROUP BY anio ORDER BY anio';
 	$result = $bd->consultar($query);
-	$anios = "";
+	$anios = "<option value=-1 selected>--- Elige a&ntilde;o ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$anios .= "<option value=$line[0]> $line[0]</option>";
 	}
@@ -29,6 +29,19 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
+	</script>
 </head>
 <body>
 	<div id="wrap">
@@ -65,49 +78,57 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>ESTADOS DE LOS TITULOS PERPETUIDAD<hr/></h2></center>
-			<table>
-				<tr>
-					<td>A&ntilde;o:</td>
-					<td><select name="anio">
-							<?php echo $anios; ?>
-						</select>
-					</td>
-					<td>Zona:</td>
-					<td><select name="zona" onchange="">
-							<?php echo $zonas; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>ESTADOS DE LOS TITULOS PERPETUIDAD<hr/></h2></center>
 				<table>
 					<tr>
-						<th>No. Correlativo</th>
-						<th>A&ntilde;o</th>
-						<th>Cementerio Nuevo o Viejo</th>
-						<th>Nombre del Propietario del T&iacute;tulo</th>
-						<th>Nicho o Fosa Com&uacute;n</th>
-						<th>Nombre del Fallecido</th>
-						<th>Beneficiarios (al menos dos)</th>
-					</tr>
-					<tr>
-						<td>No. Correlativo</td>
-						<td>A&ntilde;o</td>
-						<td>Cementerio Nuevo o Viejo</td>
-						<td>Nombre del Propietario del T&iacute;tulo</td>
-						<td>Nicho o Fosa Com&uacute;n</td>
-						<td>Nombre del Fallecido</td>
-						<td>Beneficiarios (al menos dos)</td>
+						<td>A&ntilde;o:</td>
+						<td><select name="anio">
+								<?php echo $anios; ?>
+							</select>
+						</td>
+						<td>Zona:</td>
+						<td><select name="zona" onchange="">
+								<?php echo $zonas; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>No. Correlativo</th>
+							<th>A&ntilde;o</th>
+							<th>Cementerio Nuevo o Viejo</th>
+							<th>Nombre del Propietario del T&iacute;tulo</th>
+							<th>Nicho o Fosa Com&uacute;n</th>
+							<th>Nombre del Fallecido</th>
+							<th>Beneficiarios (al menos dos)</th>
+						</tr>
+						<tr>
+							<td>No. Correlativo</td>
+							<td>A&ntilde;o</td>
+							<td>Cementerio Nuevo o Viejo</td>
+							<td>Nombre del Propietario del T&iacute;tulo</td>
+							<td>Nicho o Fosa Com&uacute;n</td>
+							<td>Nombre del Fallecido</td>
+							<td>Beneficiarios (al menos dos)</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>

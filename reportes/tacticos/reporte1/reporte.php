@@ -14,7 +14,6 @@
 	$fecha=date("d/m/Y");
 	$hora=date("H:i:s",time());
 	
-	
 	$bd = new PHPBD();
 	$bd->conectar();
 	
@@ -30,17 +29,17 @@
 	
 	if ($registros > 0){
 		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
+		$query = "SELECT des_sector FROM rpttacti1 WHERE cod_sector = '".$sector."' GROUP BY des_sector ";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-			$zonaDes = $line[0];
+			$sectorDes = $line[0];
 		}
 		$bd->liberar($result);
 		
 		$titulo='INFORME DE PERSONAS CON SERVICIOS DE AGUA Y BIENES INMUEBLES REGISTRADOS';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
+		$parametros='Fecha de Inicio: '.$finicio.' Fecha de Fin: '.$ffin.' Sector: '.$sector.' '.$sectorDes;
 		$columnas=array('Codigo Sector','Nombre del Sector','Codigo Contribuyente','Tipo de Inmueble','Dirección','Servicios que Posee');
-		$anchos=array(25,50,35,135,32);
+		$anchos=array(25,50,38,35,100,30);
 		
 		//encabezados
 		if($tipo=="XLS"){

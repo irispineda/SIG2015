@@ -20,6 +20,20 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -56,42 +70,50 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>REPORTE DE LOCALES ARRENDADOS POR LA MUNICIPALIDAD POR TIPO DE SERVICIO<hr/></h2></center>
-			<table>
-				<tr>
-					<td>Servicio:</td>
-					<td><select name="servicio" onchange="">
-							<?php echo $servicios; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>REPORTE DE LOCALES ARRENDADOS POR LA MUNICIPALIDAD POR TIPO DE SERVICIO<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Local</th>
-						<th>Nombre del Local</th>
-						<th>Tipo del Local</th>
-						<th>Nombre del Arrendador</th>
-						<th>Tipo del Contrato</th>
-						<th>Monto a Pagar</th>
-					</tr>
-					<tr>
-						<td>Codigo Local</td>
-						<td>Nombre del Local</td>
-						<td>Tipo del Local</td>
-						<td>Nombre del Arrendador</td>
-						<td>Tipo del Contrato</td>
-						<td>Monto a Pagar</td>
+						<td>Servicio:</td>
+						<td><select name="servicio" onchange="">
+								<?php echo $servicios; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Local</th>
+							<th>Nombre del Local</th>
+							<th>Tipo del Local</th>
+							<th>Nombre del Arrendador</th>
+							<th>Tipo del Contrato</th>
+							<th>Monto a Pagar</th>
+						</tr>
+						<tr>
+							<td>Codigo Local</td>
+							<td>Nombre del Local</td>
+							<td>Tipo del Local</td>
+							<td>Nombre del Arrendador</td>
+							<td>Tipo del Contrato</td>
+							<td>Monto a Pagar</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>

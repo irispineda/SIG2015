@@ -20,6 +20,20 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	
+	<script type="text/javascript">
+		function cargarDetalle(){
+			var idanio=document.getElementById("anio").value;
+			var idzona=document.getElementById("zona").value;
+			if (idanio != -1 && idzona != -1){
+				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				document.getElementById("generar").disabled=false;
+			}else{
+				document.getElementById("generar").disabled=true;
+			}
+		}
+	</script>
+	
 </head>
 <body>
 	<div id="wrap">
@@ -56,42 +70,50 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<center><h2>REPORTE DE ACTUALIZACION DE SALDOS E IMPUESTOS Y TASAS POR A&Ntilde;O<hr/></h2></center>
-			<table>
-				<tr>
-					<td>A&ntilde;o:</td>
-					<td><select name="anio">
-							<?php echo $anios; ?>
-						</select>
-					</td>
-				</tr>
-			</table>
-			<br/>
-			<div id="detalle">
+			<form action="reporte.php" method="post">
+				<center><h2>REPORTE DE ACTUALIZACION DE SALDOS E IMPUESTOS Y TASAS POR A&Ntilde;O<hr/></h2></center>
 				<table>
 					<tr>
-						<th>Codigo Municipio</th>
-						<th>Nombre Municipio</th>
-						<th>Codigo Sector</th>
-						<th>Nombre del Sector</th>
-						<th>Tasa Actual</th>
-						<th>Tasa Nueva</th>
-					</tr>
-					<tr>
-						<td>Codigo Municipio</td>
-						<td>Nombre Municipio</td>
-						<td>Codigo Sector</td>
-						<td>Nombre del Sector</td>
-						<td>Tasa Actual</td>
-						<td>Tasa Nueva</td>
+						<td>A&ntilde;o:</td>
+						<td><select name="anio">
+								<?php echo $anios; ?>
+							</select>
+						</td>
+						<td>Tipo de Reporte:</td>
+						<td><select name="tipo" id="tipo">
+								<option value="XLS" selected>Excel</option>
+								<option value="PDF">PDF</option>
+							</select>
+						</td>
 					</tr>
 				</table>
-			</div>
-			<br/>
-			<center>
-				<input type="submit" value="Generar reporte"/>
-				<input type="submit" value="Cancelar"/>
-			</center>
+				<br/>
+				<div id="detalle">
+					<table>
+						<tr>
+							<th>Codigo Municipio</th>
+							<th>Nombre Municipio</th>
+							<th>Codigo Sector</th>
+							<th>Nombre del Sector</th>
+							<th>Tasa Actual</th>
+							<th>Tasa Nueva</th>
+						</tr>
+						<tr>
+							<td>Codigo Municipio</td>
+							<td>Nombre Municipio</td>
+							<td>Codigo Sector</td>
+							<td>Nombre del Sector</td>
+							<td>Tasa Actual</td>
+							<td>Tasa Nueva</td>
+						</tr>
+					</table>
+				</div>
+				<br/>
+				<center>
+					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+				</center>
+			</form>
 		</div>
 		<div id="footer">
 			<div class="fleft"><a href="#">Homepage</a></div>
