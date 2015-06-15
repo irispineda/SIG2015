@@ -31,10 +31,17 @@
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			var idanio=document.getElementById("anio").value;
 			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var finicio=document.getElementById("datepicker1").value;
+			var ffin=document.getElementById("datepicker2").value;
+			if (finicio != "" && ffin != ""){
+				if(finicio > ffin){
+					alert("Revise el rango de fechas");
+					return;
+				}
+			}
+			if (finicio != "" && ffin != "" && idzona != -1){
+				$("#detalle").load('detalle.php?finicio='+finicio+'&ffin='+ffin+'&zona='+idzona);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;

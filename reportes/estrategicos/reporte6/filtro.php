@@ -26,10 +26,9 @@
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			var idanio=document.getElementById("anio").value;
-			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var idservicio=document.getElementById("servicio").value;
+			if (idservicio != -1){
+				$("#detalle").load('detalle.php?servicio='+idservicio);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;

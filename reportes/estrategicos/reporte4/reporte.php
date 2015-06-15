@@ -4,42 +4,39 @@
 	include "../../../libraries/excel.php";
 	
 	setlocale(LC_ALL,"es_ES");
-
-	$anio = $_POST["anio"];
-	$zona = $_POST["zona"];
+	
+	$sector = $_POST["sector"];
 	$tipo = $_POST["tipo"];
 	
 	$usuario="root";
 	$fecha=date("d/m/Y");
 	$hora=date("H:i:s",time());
 	
-	
 	$bd = new PHPBD();
 	$bd->conectar();
 	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+	$query = ' SELECT cod_sector,des_sector,des_servicio,des_contribuyente,direccion 
+			   FROM rptestra4 
+			   WHERE cod_sector='.$sector.'
+			   ORDER BY cod_sector';
 	$result = $bd->consultar($query);
 	$registros=mysqli_num_rows($result);
 	$bd->liberar($result);
 	
 	if ($registros > 0){
 		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
+		$query = "SELECT des_sector FROM rptestra4 WHERE cod_sector = '".$sector."' GROUP BY des_sector ";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-			$zonaDes = $line[0];
+			$sectorDes = $line[0];
 		}
 		$bd->liberar($result);
 		
 		$titulo='REPORTE DE CLASIFICACION DE CONTRIBUYENTES POR SERVICIOS PRESTADOS';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
-		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,135,32);
+		$parametros='Sector: '.$sector.' '.$sectorDes;
+		$columnas=array('Codigo Sector','Nombre del Sector','Servicios que posee','Nombre del Contribuyente','Dirección');
+		$anchos=array(20,45,35,70,105);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -64,11 +61,10 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-				   FROM rptestra1 
-				   WHERE anio='.$anio.'
-				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona,deudor,meses';
+		$query = ' SELECT cod_sector,des_sector,des_servicio,des_contribuyente,direccion 
+				   FROM rptestra4 
+				   WHERE cod_sector='.$sector.'
+				   ORDER BY cod_sector';
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte

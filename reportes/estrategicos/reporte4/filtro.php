@@ -8,7 +8,7 @@
 	$result = $bd->consultar($query);
 	$sectores = "<option value=-1 selected>--- Elige sector ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-		$sectores .= "<option value=$line[0]> $line[1] $line[2]</option>";
+		$sectores .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}
 	$bd->liberar($result);
 	
@@ -26,10 +26,9 @@
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			var idanio=document.getElementById("anio").value;
-			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var idsector=document.getElementById("sector").value;
+			if (idsector != -1){
+				$("#detalle").load('detalle.php?sector='+idsector);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;

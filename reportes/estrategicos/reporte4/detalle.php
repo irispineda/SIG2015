@@ -3,24 +3,22 @@
 	
 	$print="<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Meses Adeudados</th>
-						<th>Nombre del Deudor</th>
-						<th>Monto Adeudado</th>
+						<th>Codigo Sector</th>
+						<th>Nombre del Sector</th>
+						<th>Servicios que posee</th>
+						<th>Nombre del Contribuyente</th>
+						<th>Direcci&oacute;n</th>
 					</tr>";
-	$anio = $_GET["anio"];
-	$zona = $_GET["zona"];
+	$sector = $_GET["sector"];
 	$hay=true;
 	
 	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+	$query = ' SELECT cod_sector,des_sector,des_servicio,des_contribuyente,direccion 
+			   FROM rptestra4 
+			   WHERE cod_sector='.$sector.'
+			   ORDER BY cod_sector';
 	$result = $bd->consultar($query);
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;

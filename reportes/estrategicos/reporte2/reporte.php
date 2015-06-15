@@ -5,7 +5,8 @@
 	
 	setlocale(LC_ALL,"es_ES");
 
-	$anio = $_POST["anio"];
+	$finicio = $_POST["finicio"];
+	$ffin = $_POST["ffin"];
 	$zona = $_POST["zona"];
 	$tipo = $_POST["tipo"];
 	
@@ -17,19 +18,22 @@
 	$bd = new PHPBD();
 	$bd->conectar();
 	
+	$finicio=$bd->formateaFecha($finicio);
+	$ffin=$bd->formateaFecha($ffin);
+	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+	$query = " SELECT cod_zona,des_zona,cod_contribuyente,des_contribuyente,finicio,ffin,monto,saldo
+			   FROM rptestra2 
+			   WHERE ((finicio BETWEEN '".$finicio."' AND '".$ffin."') OR (ffin BETWEEN '".$finicio."' AND '".$ffin."'))
+			   AND cod_zona=".$zona."
+			   ORDER BY cod_zona";
 	$result = $bd->consultar($query);
 	$registros=mysqli_num_rows($result);
 	$bd->liberar($result);
 	
 	if ($registros > 0){
 		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
+		$query = "SELECT des_zona FROM rptestra2 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			$zonaDes = $line[0];
@@ -37,9 +41,9 @@
 		$bd->liberar($result);
 		
 		$titulo='CONTROL DE CONVENIOS DE PAGOS POR PERIODO';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
-		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,135,32);
+		$parametros='Fecha de Inicio: '.$finicio.' Fecha de Fin: '.$ffin.' Zona: '.$zona.' '.$zonaDes;
+		$columnas=array('Codigo Zona','Nombre Zona','Codigo Contribuyente','Nombre Contribuyente','Fecha Inicio','Fecha Final','Monto','Saldo');
+		$anchos=array(20,50,35,100,20,20,15,15);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -64,11 +68,11 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-				   FROM rptestra1 
-				   WHERE anio='.$anio.'
-				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona,deudor,meses';
+		$query = " SELECT cod_zona,des_zona,cod_contribuyente,des_contribuyente,finicio,ffin,monto,saldo
+				   FROM rptestra2 
+				   WHERE ((finicio BETWEEN '".$finicio."' AND '".$ffin."') OR (ffin BETWEEN '".$finicio."' AND '".$ffin."'))
+				   AND cod_zona=".$zona."
+				   ORDER BY cod_zona";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte

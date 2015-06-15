@@ -3,24 +3,23 @@
 	
 	$print="<table>
 					<tr>
-						<th>Codigo Zona</th>
-						<th>Nombre Zona</th>
-						<th>Meses Adeudados</th>
-						<th>Nombre del Deudor</th>
-						<th>Monto Adeudado</th>
+						<th>Codigo Local</th>
+						<th>Nombre del Local</th>
+						<th>Tipo del Local</th>
+						<th>Nombre del Arrendador</th>
+						<th>Tipo del Contrato</th>
+						<th>Monto a Pagar</th>
 					</tr>";
-	$anio = $_GET["anio"];
-	$zona = $_GET["zona"];
+	$servicio = $_GET["servicio"];
 	$hay=true;
 	
 	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+	$query = ' SELECT cod_local,des_local,tipo_local,arrendador,tipo_contrato,monto
+			   FROM rptestra6 
+			   WHERE cod_servicio='.$servicio.'
+			   ORDER BY cod_local';
 	$result = $bd->consultar($query);
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;
@@ -30,13 +29,14 @@
 					<td>$line[2]</td>
 					<td>$line[3]</td>
 					<td>$line[4]</td>
+					<td>$line[5]</td>
 				</tr>";
 	}
 	$bd->liberar($result);
 	$bd->cerrar();
 	
 	if ($hay){
-		$print .= "<tr><td colspan=5><center>NO EXISTE INFORMACION</center></td></tr>";
+		$print .= "<tr><td colspan=6><center>NO EXISTE INFORMACION</center></td></tr>";
 	}
 	$print .= '</table>';
 	

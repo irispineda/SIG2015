@@ -23,13 +23,26 @@
 	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
 	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
 	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
+	<script language="javascript">
+		$(function() {
+			$( "#datepicker1" ).datepicker();
+			$( "#datepicker2" ).datepicker();
+		});
+	</script>
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			var idanio=document.getElementById("anio").value;
 			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var finicio=document.getElementById("datepicker1").value;
+			var ffin=document.getElementById("datepicker2").value;
+			if (finicio != "" && ffin != ""){
+				if(finicio > ffin){
+					alert("Revise el rango de fechas");
+					return;
+				}
+			}
+			if (finicio != "" && ffin != "" && idzona != -1){
+				$("#detalle").load('detalle.php?finicio='+finicio+'&ffin='+ffin+'&zona='+idzona);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;
@@ -107,10 +120,9 @@
 							<th>Encargado del Lugar</th>
 							<th>Fecha de Cambios</th>
 							<th>Fecha de Revisiones</th>
-							<th>Reporte</th>
-							<th>Aprobado</th>
+							<th>Reporte Aprobado</th>
 						</tr>
-						<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>
+						<tr><td colspan=6><center>NO EXISTE INFORMACION</center></td></tr>
 					</table>
 				</div>
 				<br/>

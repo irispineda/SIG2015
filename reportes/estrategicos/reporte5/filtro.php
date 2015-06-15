@@ -15,10 +15,11 @@
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			var idanio=document.getElementById("anio").value;
-			var idzona=document.getElementById("zona").value;
-			if (idanio != -1 && idzona != -1){
-				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+			var fecha=document.getElementById("datepicker1").value;
+			if (fecha != ""){
+				
+			alert(fecha);
+				$("#detalle").load('detalle.php?fecha='+fecha);
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;

@@ -5,8 +5,7 @@
 	
 	setlocale(LC_ALL,"es_ES");
 
-	$anio = $_POST["anio"];
-	$zona = $_POST["zona"];
+	$fecha1 = $_POST["fecha"];
 	$tipo = $_POST["tipo"];
 	
 	$usuario="root";
@@ -17,29 +16,23 @@
 	$bd = new PHPBD();
 	$bd->conectar();
 	
+	$fecha1=$bd->formateaFecha($fecha1);
+	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+	$query = " SELECT cod_contribuyente,des_contribuyente,monto 
+			   FROM rptestra5 
+			   WHERE fecha='".$fecha1."'
+			   ORDER BY cod_contribuyente";
 	$result = $bd->consultar($query);
 	$registros=mysqli_num_rows($result);
 	$bd->liberar($result);
 	
 	if ($registros > 0){
-		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
-		$result = $bd->consultar($query);
-		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
-			$zonaDes = $line[0];
-		}
-		$bd->liberar($result);
 		
 		$titulo='REPORTE DEL SEGUIMIENTO DE LOS CONTRIBUYENTES SOLVENTES CON LA MUNICIPALIDAD';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
-		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,135,32);
+		$parametros='Fecha: '.$fecha1;
+		$columnas=array('Codigo Contribuyente','Nombre Contribuyente','Monto Pagado');
+		$anchos=array(50,190,37);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -64,11 +57,10 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-				   FROM rptestra1 
-				   WHERE anio='.$anio.'
-				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona,deudor,meses';
+		$query = " SELECT cod_contribuyente,des_contribuyente,monto 
+				   FROM rptestra5 
+				   WHERE fecha='".$fecha1."'
+				   ORDER BY cod_contribuyente";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte

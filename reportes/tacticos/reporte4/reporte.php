@@ -5,7 +5,8 @@
 	
 	setlocale(LC_ALL,"es_ES");
 
-	$anio = $_POST["anio"];
+	$finicio = $_POST["finicio"];
+	$ffin = $_POST["ffin"];
 	$zona = $_POST["zona"];
 	$tipo = $_POST["tipo"];
 	
@@ -18,9 +19,9 @@
 	$bd->conectar();
 	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-			   FROM rptestra1 
-			   WHERE anio='.$anio.'
+	$query = ' SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
+			   FROM rpttacti4 
+			   WHERE ((fcambio BETWEEN '.$finicio.' AND '.$ffin.') OR (frevision BETWEEN '.$finicio.' AND '.$ffin.'))
 			   AND cod_zona='.$zona.'
 			   ORDER BY cod_zona';
 	$result = $bd->consultar($query);
@@ -29,7 +30,7 @@
 	
 	if ($registros > 0){
 		//extraer datos de la zona
-		$query = "SELECT des_zona FROM rptestra1 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
+		$query = "SELECT des_zona FROM rpttacti4 WHERE cod_zona = '".$zona."' GROUP BY des_zona ";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			$zonaDes = $line[0];
@@ -38,8 +39,8 @@
 		
 		$titulo='INFORME DEL RESPONSABLE POR BARRIO Y CANTONES DEL MUNICIPIO';
 		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
-		$columnas=array('Codigo Zona','Nombre Zona','Meses Adeudados','Nombre del Deudor','Monto Adeudado');
-		$anchos=array(25,50,35,135,32);
+		$columnas=array('Codigo Zona','Nombre Zona','Encargado del Lugar','Fecha de Cambios','Fecha de Revisiones','Reporte	Aprobado');
+		$anchos=array(25,50,35,35,32,100);
 		
 		//encabezados
 		if($tipo=="XLS"){
@@ -64,11 +65,11 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,meses,deudor,monto 
-				   FROM rptestra1 
-				   WHERE anio='.$anio.'
+		$query = ' SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
+				   FROM rpttacti4 
+				   WHERE ((fcambio BETWEEN '.$finicio.' AND '.$ffin.') OR (frevision BETWEEN '.$finicio.' AND '.$ffin.'))
 				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona,deudor,meses';
+				   ORDER BY cod_zona';
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte
