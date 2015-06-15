@@ -6,7 +6,7 @@
 	//consulta para obtener los sectores
 	$query = 'SELECT cod_sector, des_sector FROM rptestra4 GROUP BY cod_sector, des_sector ORDER BY cod_sector';
 	$result = $bd->consultar($query);
-	$sectores = "";
+	$sectores = "<option value=-1 selected>--- Elige sector ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$sectores .= "<option value=$line[0]> $line[1] $line[2]</option>";
 	}

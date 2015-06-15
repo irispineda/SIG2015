@@ -6,7 +6,7 @@
 	//consulta para obtener los servicios
 	$query = 'SELECT cod_servicio, des_servicio FROM rptestra6 GROUP BY cod_servicio, des_servicio ORDER BY cod_servicio';
 	$result = $bd->consultar($query);
-	$servicios = "";
+	$servicios = "<option value=-1 selected>--- Elige servicio ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$servicios .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}

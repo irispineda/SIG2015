@@ -6,7 +6,7 @@
 	//consulta para obtener las zonas
 	$query = 'SELECT cod_zona, des_zona FROM rptestra2 GROUP BY cod_zona, des_zona ORDER BY cod_zona';
 	$result = $bd->consultar($query);
-	$zonas = "";
+	$zonas = "<option value=-1 selected>--- Elige zona ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$zonas .= "<option value=$line[0]> $line[0] $line[1]</option>";
 	}

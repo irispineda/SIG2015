@@ -6,7 +6,7 @@
 	//consulta para obtener los años
 	$query = 'SELECT anio FROM rptestra3 GROUP BY anio ORDER BY anio';
 	$result = $bd->consultar($query);
-	$anios = "";
+	$anios = "<option value=-1 selected>--- Elige a&ntilde;o ---</option>";
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$anios .= "<option value=$line[0]> $line[0]</option>";
 	}
