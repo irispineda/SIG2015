@@ -72,7 +72,7 @@
 		<!--<div id="avisos">
 		</div>-->
 		<div id="content">
-			<form action="reporte.php" method="post">
+			<form action="reporte.php" method="post" onload="cargarDetalle();">
 				<center><h2>REPORTE DE LOCALES ARRENDADOS POR LA MUNICIPALIDAD POR TIPO DE SERVICIO<hr/></h2></center>
 				<table>
 					<tr>
@@ -105,8 +105,8 @@
 				</div>
 				<br/>
 				<center>
-					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
-					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+					<input name="boton" id="generar" type="submit" value="Generar reporte" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" onclick="location.href='../../../index.html'" />
 				</center>
 			</form>
 		</div>

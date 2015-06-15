@@ -125,8 +125,8 @@
 				</div>
 				<br/>
 				<center>
-					<input name="boton" id="generar" type="submit" value="Generar reporte" disabled="true" />
-					<input name="boton" id="cancelar" type="button" value="Cancelar" />
+					<input name="boton" id="generar" type="submit" value="Generar reporte" />
+					<input name="boton" id="cancelar" type="button" value="Cancelar" onclick="location.href='../../../index.html'" />
 				</center>
 			</form>
 		</div>
