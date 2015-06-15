@@ -29,14 +29,17 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<title>Sistema de Informaci&oacute;n Gerencial</title>
 	<link href="../../../css/style.css" rel="stylesheet" type="text/css" />
+	<link href="../../../js/jquery-ui-1.11.2/jquery-ui.css" rel="stylesheet" type="text/css" />
+	<script src="../../../js/jquery-ui-1.11.2/external/jquery/jquery.js"></script>
+	<script src="../../../js/jquery-ui-1.11.2/jquery-ui.js"></script>
 	
 	<script type="text/javascript">
 		function cargarDetalle(){
-			alert("123");
 			var idanio=document.getElementById("anio").value;
 			var idzona=document.getElementById("zona").value;
 			if (idanio != -1 && idzona != -1){
 				$("#detalle").load('detalle.php?anio='+idanio+'&zona='+idzona);
+				alert("123");
 				document.getElementById("generar").disabled=false;
 			}else{
 				document.getElementById("generar").disabled=true;

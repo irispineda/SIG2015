@@ -22,7 +22,7 @@
 			   FROM rpttacti2 
 			   WHERE anio='.$anio.'
 			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+			   ORDER BY cod_zona';echo $query;
 	$result = $bd->consultar($query);
 	$i=0;
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
@@ -42,9 +42,9 @@
 	$bd->cerrar();
 	
 	if ($hay){
-		$print .= "<tr><td colspan=7><center>NO EXISTE INFORMACION</center></td></tr>";
+		$print .= "<tr><td colspan=7><center>NO EXISTE INFORMACION1</center></td></tr>";
 	}
 	$print .= '</table>';
-	
-	echo $print;
+	echo $query;
+	//echo $print;
 ?>
