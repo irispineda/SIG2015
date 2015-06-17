@@ -34,6 +34,22 @@
 				 ->setCellValue($cols[$col].'2', 'Fecha: '.$fecha)
 				 ->setCellValue($cols[$col].'3', 'Hora: '.$hora);
 			
+			$sheet = $this->getActiveSheet();
+			$styleArray = array('font'		=>array('bold'=>true,'size'=>20),
+								'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+			$sheet->getStyle('B1')->applyFromArray($styleArray);
+			
+			$styleArray = array('font'		=>array('bold'=>true,'size'=>16),
+								'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+			$sheet->getStyle('B2')->applyFromArray($styleArray);
+			
+			$styleArray = array('font'		=>array('italic'=>true,'size'=>14),
+								'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+			$sheet->getStyle('B3')->applyFromArray($styleArray);
+			
+			$styleArray = array('font'		=>array('size'=>8),
+								'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_RIGHT));
+			$sheet->getStyle($cols[$col].'1:'.$cols[$col].'3')->applyFromArray($styleArray);
 			
 			$objDrawing = new PHPExcel_Worksheet_Drawing();
 			$objDrawing->setName('Logo');
@@ -41,24 +57,9 @@
 			$logo = '../../../images/header.jpg'; // Provide path to your logo file
 			$objDrawing->setPath($logo);  //setOffsetY has no effect
 			$objDrawing->setCoordinates('A1');
-			$objDrawing->setHeight(60); // logo height
+			$objDrawing->setHeight(100); // logo height
 			$objDrawing->setWorksheet($this->getActiveSheet());
 			
-			/*$this->SetFont('Arial','B',20);
-			$this->Cell(0,8,,0,1,'C');
-			
-			$this->Image("../../../images/header.jpg",10,8,33);
-			
-			$this->SetFont('Arial','B',16);
-			$this->Cell(0,8,utf8_decode($titulo),0,1,'C');
-			
-			$this->SetFont('Arial','I',14);
-			$this->Cell(0,8,utf8_decode($param),0,0,'C');
-			
-			$this->SetFont('Arial','',8);
-			
-			$this->SetFont('Arial','B',12);
-			$this->Cell(0,10,'',0,1,'C');*/
 		}
 		
 		//pie de pagina
@@ -77,10 +78,20 @@
 				$this->setActiveSheetIndex(0)
 				     ->setCellValue($cols[$i].'6', utf8_decode($col));
 				$this->getActiveSheet()->getColumnDimensionByColumn($i)->setWidth($size[$i]-10);
+				
+				$sheet = $this->getActiveSheet();
+				$default_border = array('style' => PHPExcel_Style_Border::BORDER_THIN,
+										'color' => array('rgb'=>'000000'));
+				$styleArray = array('font'		=>array('bold'=>true,'size'=>10),
+									'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+									'borders' 	=>array('bottom'	=> $default_border,
+														'left' 		=> $default_border,
+														'top' 		=> $default_border,
+														'right' 	=> $default_border,));
+				$sheet->getStyle($cols[$i].'6')->applyFromArray($styleArray);
+				
 				++$i;
 			}
-			
-			/*$this->SetFont('Arial','B',10);*/
 		}
 		
 		//datos de tabla
@@ -90,10 +101,21 @@
 			$i=0;
 			foreach($datos as $col){
 				$this->setActiveSheetIndex(0)
-				 ->setCellValue($cols[$i].$fil, utf8_decode($col));
+					 ->setCellValue($cols[$i].$fil, utf8_decode($col));
+				
+				$sheet = $this->getActiveSheet();
+				$default_border = array('style' => PHPExcel_Style_Border::BORDER_THIN,
+										'color' => array('rgb'=>'000000'));
+				$styleArray = array('font'		=>array('size'=>10),
+									'alignment'	=>array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER),
+									'borders' 	=>array('bottom'	=> $default_border,
+														'left' 		=> $default_border,
+														'top' 		=> $default_border,
+														'right' 	=> $default_border,));
+				$sheet->getStyle($cols[$i].$fil)->applyFromArray($styleArray);
+				 
 				 ++$i;
 			}
-			/*$this->SetFont('Arial','',10);*/
 		}
 	}
 ?>
