@@ -18,11 +18,15 @@
 	//consulta para obtener los datos
 	$bd = new PHPBD();
 	$bd->conectar();
-	$query = ' SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
+	
+	$finicio=$bd->formateaFecha($finicio);
+	$ffin=$bd->formateaFecha($ffin);
+	
+	$query = " SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
 			   FROM rpttacti4 
-			   WHERE ((fcambio BETWEEN '.$finicio.' AND '.$ffin.') OR (frevision BETWEEN '.$finicio.' AND '.$ffin.'))
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+			   WHERE ((fcambio BETWEEN '".$finicio."' AND '".$ffin."') OR (frevision BETWEEN '".$finicio."' AND '".$ffin."'))
+			   AND cod_zona=".$zona."
+			   ORDER BY cod_zona";
 	$result = $bd->consultar($query);
 	while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 		$hay=false;

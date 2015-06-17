@@ -92,7 +92,7 @@
 			exit;
 		}else{
 			//reporte en pdf
-			$pdf->Output('RptEstra1','I');
+			$pdf->Output('RptEstra4','I');
 		}
 	}else{
 		$bd->cerrar();

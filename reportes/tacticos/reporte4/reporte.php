@@ -18,12 +18,15 @@
 	$bd = new PHPBD();
 	$bd->conectar();
 	
+	$finicio=$bd->formateaFecha($finicio);
+	$ffin=$bd->formateaFecha($ffin);
+	
 	//evaluar si existen registros continuar sino regresar atras
-	$query = ' SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
+	$query = " SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
 			   FROM rpttacti4 
-			   WHERE ((fcambio BETWEEN '.$finicio.' AND '.$ffin.') OR (frevision BETWEEN '.$finicio.' AND '.$ffin.'))
-			   AND cod_zona='.$zona.'
-			   ORDER BY cod_zona';
+			   WHERE ((fcambio BETWEEN '".$finicio."' AND '".$ffin."') OR (frevision BETWEEN '".$finicio."' AND '".$ffin."'))
+			   AND cod_zona=".$zona."
+			   ORDER BY cod_zona";
 	$result = $bd->consultar($query);
 	$registros=mysqli_num_rows($result);
 	$bd->liberar($result);
@@ -38,7 +41,7 @@
 		$bd->liberar($result);
 		
 		$titulo='INFORME DEL RESPONSABLE POR BARRIO Y CANTONES DEL MUNICIPIO';
-		$parametros='Año: '.$anio.' Zona: '.$zona.' '.$zonaDes;
+		$parametros='Fecha de Inicio:'.$finicio.' Fecha de Fin: '.$ffin.' Zona: '.$zona.' '.$zonaDes;
 		$columnas=array('Codigo Zona','Nombre Zona','Encargado del Lugar','Fecha de Cambios','Fecha de Revisiones','Reporte	Aprobado');
 		$anchos=array(25,50,35,35,32,100);
 		
@@ -65,11 +68,11 @@
 		}
 		
 		//consulta para obtener los datos
-		$query = ' SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
+		$query = " SELECT cod_zona,des_zona,encargado,fcambio,frevision,reporte 
 				   FROM rpttacti4 
-				   WHERE ((fcambio BETWEEN '.$finicio.' AND '.$ffin.') OR (frevision BETWEEN '.$finicio.' AND '.$ffin.'))
-				   AND cod_zona='.$zona.'
-				   ORDER BY cod_zona';
+				   WHERE ((fcambio BETWEEN '".$finicio."' AND '".$ffin."') OR (frevision BETWEEN '".$finicio."' AND '".$ffin."'))
+				   AND cod_zona=".$zona."
+				   ORDER BY cod_zona";
 		$result = $bd->consultar($query);
 		while ($line = mysqli_fetch_array($result, MYSQL_NUM)) {
 			//cuerpo del reporte
@@ -97,7 +100,7 @@
 			exit;
 		}else{
 			//reporte en pdf
-			$pdf->Output('RptEstra1','I');
+			$pdf->Output('RptTacti4','I');
 		}
 	}else{
 		$bd->cerrar();

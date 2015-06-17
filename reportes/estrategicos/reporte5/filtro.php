@@ -17,8 +17,6 @@
 		function cargarDetalle(){
 			var fecha=document.getElementById("datepicker1").value;
 			if (fecha != ""){
-				
-			alert(fecha);
 				$("#detalle").load('detalle.php?fecha='+fecha);
 				document.getElementById("generar").disabled=false;
 			}else{

@@ -95,7 +95,7 @@
 			exit;
 		}else{
 			//reporte en pdf
-			$pdf->Output('RptEstra1','I');
+			$pdf->Output('RptTacti5','I');
 		}
 	}else{
 		$bd->cerrar();
