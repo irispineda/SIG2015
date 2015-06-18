@@ -22,6 +22,8 @@
 			$this->Cell(0,8,utf8_decode($this->subject),0,0,'C');
 			
 			$this->SetFont('Arial','',8);
+			session_start();
+			$this->SetAuthor($_SESSION['User']);
 			$this->Cell(0,4,'Usuario: '.utf8_decode($this->author),0,1,'R');
 			$this->Cell(0,4,'Fecha: '.$this->fecha,0,1,'R');
 			$this->Cell(0,4,'Hora: '.$this->hora,0,1,'R');

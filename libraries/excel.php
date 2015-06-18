@@ -13,13 +13,12 @@
 		
 		//cabecera de pagina
 		function Encabezado($titulo,$param,$col){
-			$usuario="root";
+			session_start();
+			$usuario=$_SESSION['User'];
 			$fecha=date("d/m/Y");
 			$hora=date("H:i:s",time());
 			
 			$cols=array('A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
-			
-			
 			
 			$this->setActiveSheetIndex(0)
 				 ->mergeCells('B1:'.$cols[$col-1].'1')
