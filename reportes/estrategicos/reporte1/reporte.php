@@ -52,7 +52,8 @@
 			//reporte en pdf
 			$pdf=new PDF('L');
 			$pdf->SetTitle($titulo);
-			$pdf->SetAuthor("root");
+			session_start();
+			$pdf->SetAuthor($_SESSION['User']);
 			$pdf->SetSubject($parametros);
 			$pdf->fecha=date("d/m/Y");
 			$pdf->hora=date("H:i:s",time());
