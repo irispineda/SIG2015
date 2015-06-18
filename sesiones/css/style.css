@@ -1,0 +1,159 @@
+/* GENERALES */
+body {margin:25px auto;padding:0;font:70% Arial,sans-serif;background:#5298af;color:#222;line-height:1.3em}
+head {background: url("/scnpalas/images/header.jpg");}
+p {margin:0 0 18px 8px}
+h2 {font-size:1.5em;font-weight:normal;letter-spacing:-1px;margin:10px 0 8px 0}
+h3 {font-size:1.2em;margin:2px 0 8px 0}
+
+/* MARCO */
+#wrap {background:#fff;color:#303030;margin:0 auto;width:95%; height:110%;-webkit-border-radius: 20px 20px 20px 20px;/*border:1px Solid #ff6600;*/}
+
+/* ENCABEZADO */
+#header {clear:both;background:url(../images/header.jpg) right no-repeat;height:150px;background-size:100px 110px;border-bottom:4px Solid #ff6600;}
+#header h1 {font-size:3.8em;color:#5298af;padding:55px 0 10px 45px;font-family:Tahoma;}
+#header h1:hover{color:#ff6600;}
+#header p{font-size:2.0em;color:#444;padding:15px 0 10px 45px;font-family:Tahoma;}
+
+/* MENU */
+#menu {clear:both;background-color:#fff;float:left;width:20%;height:420px;margin:0;padding:20px 0 0 15px;border-right:3px solid #ff6600;clear:booth;}
+#menu ul {list-style:none;width:95%;margin:0 0 20px 0;padding:0;font-size:1.5em;letter-spacing:-1px;color:#009933;background:#ecf4f6;
+		  display:compact;padding-left:10px;margin-top:0px;}
+#menu li {margin-bottom:4px;line-height:15px;border-bottom:1px solid #E4E4E4;display:block;}
+#menu ul li:hover{color:#FF6600;display: block;padding-left:10px;}
+#menu ul ul {font-size:0.8em;width:100px;font-weight:normal;margin:5px 0 8px 20px;}
+#menu ul ul li {margin-bottom:3px;}
+#menu ul li li{width:150px;height:55px;display:none;}
+#menu li:hover ul li{ display:block;padding-bottom:5px;color:#383838;}
+#menu li:hover ul li li{ background: #333; padding-left:5px;font-size:13px; color:#383838;}
+#menu ul ul li a {border:0;padding:2px;border-left: 8px solid #009933;}
+#menu li a {text-decoration:none;color:#009933;display:block;height:0.8em;margin-bottom:4px;border-bottom:1px solid #E4E4E4;border-left: 8px solid #009933;padding-top:5px;}
+#menu li a:hover {color:#FF6600;text-decoration:none;border-left:8px solid #FF6600;}
+#menu .current {border-left:8px solid #d88d44;}
+
+/* AVISOS */
+#avisos {background-color:#fff;clear:both;float:left;width:20%;height:160px;margin:0;padding:20px 0 0 15px;border-right:3px solid #ff6600;overflow: scroll;text-align:right;font-size:11px;}
+#avisos h1{line-height:35px;font-size:20px;color:#009933;padding-left:20px;background:#ecf4f6;display:compact;margin:3px 0 0 0;text-align:left;}
+#avisos h2{font-family:tahoma;color:#fff;font-weight:bold;font-size:11px;text-align:center;background:#333;height:25px;line-height:25px;width:85px;}
+#avisos p{color:#333;font-family:tahoma;font-size:11px;text-align:justify;padding-right:5px}
+#avisos a{color:#33afd1;text-decoration:none;}
+#avisos a:hover{color:#FF6600;text-decoration:underline;}
+
+/* CONTENIDO */
+#content {overflow: scroll;height:460px;padding:20px;/*margin:5px 170px 0 170px;padding:2px 0 0 0;line-height:1.5em;text-align:left;height:300px;width:580px;*/}
+#content h2 {font-size:1.6em;margin:20px 0 10px 0}
+#content h3 {font-size:1.4em;font-weight:normal;letter-spacing:-1px;margin:10px 0 8px 0}
+#content p {text-align:justify}
+
+/* PIE */
+#footer{background-color:#333333;height:30px;-webkit-border-radius: 0px 0px 20px 20px;}
+#footer table{text-align:center;}
+#footer a{color:#ff6600;}
+#footer a:hover {color:#fff}
+#footer p {margin:0 0 0px 0px}
+#footer .fleft {float:left}
+#footer .fright  {float:right;margin:0 auto;}
+#footer .fcenter {float:none;margin:0 auto;text-align:center}
+
+/* ICONOS */
+#iconos{border-radius: 5px; border: 1px solid Gray;box-shadow: 0px 0px 10px #33afd1;}
+#iconos:hover{box-shadow: 0px 0px 10px #FF6600;}
+.iconnew{content:url(/scnpalas/images/new.jpg); width: 25px;height: 25px;}
+.icondel{content:url(/scnpalas/images/del.jpg); width: 25px;height: 25px;}
+.iconview{content:url(/scnpalas/images/view.jpg); width: 25px;height: 25px;}
+.iconedit{content:url(/scnpalas/images/edit.jpg); width: 25px;height: 25px;}
+.iconprint{content:url(/scnpalas/images/print.jpg); width: 25px;height: 25px;}
+.iconprintxls{content:url(/scnpalas/images/printxls.jpg); width: 25px;height: 25px;}
+.iconlock{content:url(/scnpalas/images/lock.jpg); width: 25px;height: 25px; }
+.iconquery{content:url(/scnpalas/images/search.jpg); width: 25px;height: 25px; }
+.iconalta{content:url(/scnpalas/images/alta.jpg); width: 25px;height: 25px;}
+.iconbaja{content:url(/scnpalas/images/baja.jpg); width: 25px;height: 25px; }
+.iconcerrar{content:url(/scnpalas/images/lockreg.jpg); width: 25px;height: 25px; }
+.icondeleteall{content:url(/scnpalas/images/delete_all.png); width: 25px;height: 25px; }
+.iconasociar{content:url(/scnpalas/images/asociar.png); width: 25px;height: 25px; }
+
+/* LOGIN 
+#login {position:absolute; top:200px; float:left; width:95%; height:310px;}/*border:3px solid Red;
+#login_outer {overflow:hidden;text-align:center;margin:auto;}
+#login_inner {display:inline-table;height:100px;width:100px;margin:0px;font-weight:bold;clear:both;border:3px solid White; background-color: #5298af;-webkit-border-radius: 20px 20px 20px 20px;}
+#login input {border: none;font-family: inherit;font-size: inherit;font-weight: inherit;line-height: inherit;-webkit-appearance: none;}
+#login h2 {-webkit-border-radius: 20px 20px 0 0;-moz-border-radius: 20px 20px 0 0;border-radius: 20px 20px 0 0;color: White;font-size: 28px;padding: 20px 26px;}
+#login fieldset {background-color: #fff;-webkit-border-radius: 0 0 20px 20px;-moz-border-radius: 0 0 20px 20px;border-radius: 0 0 20px 20px;padding: 20px 26px;}
+#login fieldset p {color: #20526a;margin-bottom: 14px;}
+#login fieldset p:last-child {margin-bottom: 0;}
+#login fieldset input {-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;}
+#login fieldset input[type="email"], #login fieldset input[type="password"] {background-color: #eee;color: #ff6600;padding: 4px 10px;width: 328px;}
+/*#login fieldset input[type="email"], #login fieldset input[type="password"] {background-color: #eee;color: #404053;padding: 4px 10px;width: 328px;}
+#login fieldset input[type="submit"] {background-color: #5298af;color: #fff;display: block;margin: 0 auto;padding: 4px 0;width: 100px;}
+#login fieldset input[type="submit"]:hover {background-color: #ff6600;}*/
+
+/* Message */
+#message {position:absolute; top:175px; float:left; width:1000px; height:310px;}/*border:3px solid Red;*/
+#message_outer {overflow:hidden;text-align:center;margin:auto;}
+#message_inner {display:inline-table;height:100px;width:100px;margin:0px;font-weight:bold;clear:both;border:3px solid White; background-color: #5298af;-webkit-border-radius: 20px 20px 20px 20px;}
+#message fieldset p {color: #20526a;margin-bottom: 14px;}
+#message h2 {-webkit-border-radius: 20px 20px 0 0;-moz-border-radius: 20px 20px 0 0;border-radius: 20px 20px 0 0;color: White;font-size: 28px;padding: 20px 26px;}
+#message fieldset {background-color: #fff;-webkit-border-radius: 0 0 20px 20px;-moz-border-radius: 0 0 20px 20px;border-radius: 0 0 20px 20px;padding: 20px 26px;}
+#message fieldset p:last-child {margin-bottom: 0;width: 328px;}
+#message fieldset input[type="submit"] {background-color: #5298af;color: #fff;display: block;margin: 0 auto;padding: 4px 0;width: 100px;}
+#message fieldset input[type="submit"]:hover {background-color: #ff6600;}
+
+/* CONSULTA */
+#query {display: none;font-size: 15px;}
+#query table{border: none;}
+
+/* TABLAS */
+#tabla{border:1px solid #5298af;width:100%;-webkit-border-radius: 10px 10px 10px 10px;}
+#tabla caption{-webkit-border-radius: 10px 10px 10px 10px;color:#009933;background:#ecf4f6;font-size:2.2em;padding-top:15px;padding-bottom:15px;}
+#tabla th{background:#5298af;padding-bottom:10px;padding-top:10px;font-size:1.2em;-webkit-border-radius: 10px 10px 10px 10px;}
+
+#tabla tbody tr{background:#f1f1f1;padding-bottom:5px;padding-top:5px;height:30px;font-size:1.1em;}
+#tabla tbody tr:hover{background:#FF6600;transition: all 0.1s ease-in-out;}
+
+table caption{-webkit-border-radius: 10px 10px 10px 10px;color:#009933;background:#ecf4f6;font-size:2.2em;padding-top:15px;padding-bottom:15px;}
+table{border:1px solid #5298af;-webkit-border-radius: 10px 10px 10px 10px;}
+
+#content table{margin:0 auto;}
+/* estilo usado en el Loguin*/
+.contenedor {
+     margin:0 auto;
+     width:100%; 
+     text-align:center;
+	 height:auto;
+	 padding:10px;
+	font-size:1.6em;
+	margin:20px 0 10px 0;
+    color:#5298af;
+		
+}
+span {
+     color:red;
+}
+#formulario {
+	position: center;
+     margin:0 auto;
+     border-radius:5px;
+     box-shadow:2px 3px 4px #000;
+     border:1px solid #000;
+     width:250px;
+	 height:auto;
+     padding:10px;
+     background:#d1d1d1;
+
+	 
+}
+input {
+     border-radius:5px;
+     padding:8px;
+}
+button {
+     border-radius:5px;
+     padding:8px;
+     background:#000;
+     color:#fff;
+     cursor:pointer;
+}
+.error{
+	background-color:#D50909;
+	color:#FFF;
+	padding:5px;
+}
